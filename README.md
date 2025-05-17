@@ -101,7 +101,7 @@ The following table summarizes the statistics of the currently supported dataset
 
 | Dataset | Users | Items | Interactions | Density | Avg. Interactions | Avg. Title Tokens |
 | ------- | ----: | ----: | -----------: | ------: | ----------------------: | ----------------: |
-| [Amazon-2014-Beauty](#amazon) | 22,332 | 12,086 | 198,215 | 0.00073 | 8.88 | 19.6 |
+| [Amazon-2014-Beauty](#amazon) | 22,332 | 12,086 | 198,215 | 0.00073 | 8.88 | 19.57 |
 | [Amazon-2014-Book](#amazon) | 509,334 | 280,497 | 7,109,843 | 0.00005 | 13.96 | 11.15 |
 | [Amazon-2014-Book-1M](#amazon) | 38,234 | 38,519 | 517,167 | 0.00035 | 13.53 | 9.81 |
 | [Amazon-2014-CD](#amazon) | 51,573 | 46,373 | 795,961 | 0.00033 | 15.43 | 6.51 |
