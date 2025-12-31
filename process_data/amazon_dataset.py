@@ -16,7 +16,10 @@ __all__ = [
 
 
 def read_json(
-    file_path: str, selected_cols: list[str] | None = None, standard: bool = True
+    file_path: str,
+    selected_cols: list[str] | None = None,
+    standard: bool = True,
+    chunksize: int = 100000,
 ) -> pd.DataFrame:
     r"""Read a JSON file and return a DataFrame. Note that only the columns
     specified in ``selected_cols`` will be selected. If ``selected_cols`` is
@@ -43,26 +46,43 @@ def read_json(
     Returns:
         The DataFrame containing the data from the JSON file.
     """
+    chunks = []
     if standard:
-        df = pd.read_json(file_path, lines=True)
+        # df = pd.read_json(file_path, lines=True)
+        for chunk in pd.read_json(file_path, lines=True, chunksize=chunksize):
+            if selected_cols is not None:
+                chunk = chunk[selected_cols]
+            chunk = chunk.dropna()
+            chunks.append(chunk)
     else:
-        with open(file_path, "r", encoding="utf-8") as f:
-            lines = f.readlines()
         data = []
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                data.append(ast.literal_eval(line))
-            except Exception as error:
-                print(f"Error parsing line: {line}")
-                print(f"Error message: {error}")
-        df = pd.DataFrame(data)
-    if selected_cols is not None:
-        df = df[selected_cols]
-    df = df.dropna()
-    return df
+        with open(file_path, "r", encoding="utf-8") as f:
+            for i, line in enumerate(f):
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    item = ast.literal_eval(line)
+                    if selected_cols:
+                        item = {k: item.get(k) for k in selected_cols}
+                    data.append(item)
+                except Exception:
+                    continue
+
+                if len(data) >= chunksize:
+                    df_chunk = pd.DataFrame(data)
+                    df_chunk = df_chunk.dropna()
+                    chunks.append(df_chunk)
+                    data = []
+
+        if data:
+            df_chunk = pd.DataFrame(data)
+            df_chunk = df_chunk.dropna()
+            chunks.append(df_chunk)
+
+    if chunks:
+        return pd.concat(chunks, ignore_index=True)
+    return pd.DataFrame()
 
 
 class AmazonDatasetProcessor(BaseDatasetProcessor):
