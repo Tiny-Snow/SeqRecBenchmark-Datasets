@@ -1,0 +1,5 @@
+# raw data files
+raw/
+
+# pycache files
+__pycache__/
