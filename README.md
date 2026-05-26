@@ -395,4 +395,16 @@ We are pleased to see that the carefully curated dataset above could have a posi
   booktitle={Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V. 2},
   pages={3542--3552},
   year={2025}
+@inproceedings{yang2026bear,
+  title={BEAR: Towards Beam-Search-Aware Optimization for Recommendation with Large Language Models},
+  author={Yang, Weiqin and Wang, Bohao and Xu, Zhenxiang and Chen, Jiawei and Zhang, Shengjia and Chen, Jingbang and Jin, Canghong and Wang, Can},
+  booktitle={Proceedings of the 49th international ACM SIGIR conference on Research and development in Information Retrieval},  
+  year={2026}
+}
+@inproceedings{yang2026mitigating,
+  title={Mitigating Popularity Bias Amplification in Scaling Transformer-based Sequential Recommenders},
+  author={Yang, Weiqin and Pan, Yue and Gao, Chongming and Zhou, Sheng and Wang, Xiang and and Wang, Can and Chen, Jiawei},
+  booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V. 2},
+  year={2026}
+}
 ```
